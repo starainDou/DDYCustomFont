@@ -10,7 +10,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [self ddy_FontApplication:application didFinishLaunchingWithOptions:launchOptions];
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _window.backgroundColor = [UIColor whiteColor];
     _window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[ViewController new]];

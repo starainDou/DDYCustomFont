@@ -8,8 +8,8 @@
 + (void)load {
     // NSSelectorFromString(@"methodName") 或 @selector(methodName);
     // 交换启动方法
-//    [self changeOrignalSEL:@selector(application:didFinishLaunchingWithOptions:)
-//                swizzleSEL:@selector(ddy_FontApplication:didFinishLaunchingWithOptions:)];
+    [self changeOrignalSEL:@selector(application:didFinishLaunchingWithOptions:)
+                swizzleSEL:@selector(ddy_FontApplication:didFinishLaunchingWithOptions:)];
 }
 
 #pragma mark swizzleMethod
@@ -35,7 +35,7 @@
             });
         }];
     });
-//    [self ddy_FontApplication:application didFinishLaunchingWithOptions:launchOptions];
+    [self ddy_FontApplication:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
 
