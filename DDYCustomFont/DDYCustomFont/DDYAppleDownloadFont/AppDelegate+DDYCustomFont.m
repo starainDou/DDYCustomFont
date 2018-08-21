@@ -7,8 +7,8 @@
 + (void)load {
     // NSSelectorFromString(@"methodName") 或 @selector(methodName);
     // 交换启动方法
-    [self changeOrignalSEL:@selector(application:didFinishLaunchingWithOptions:)
-                swizzleSEL:@selector(ddy_FontApplication:didFinishLaunchingWithOptions:)];
+//    [self changeOrignalSEL:@selector(application:didFinishLaunchingWithOptions:)
+//                swizzleSEL:@selector(ddy_FontApplication:didFinishLaunchingWithOptions:)];
 }
 
 #pragma mark swizzleMethod
@@ -24,7 +24,9 @@
 
 #pragma mark 在程序启动后注册3DTouch
 - (BOOL)ddy_FontApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [AppDelegate ddy_MatchAndDownload:[[NSUserDefaults standardUserDefaults] objectForKey:@"DDYDownloadFontName"] complete:nil];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [AppDelegate ddy_MatchAndDownload:[[NSUserDefaults standardUserDefaults] objectForKey:@"DDYDownloadFontName"] complete:nil];
+    });
     [self ddy_FontApplication:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
