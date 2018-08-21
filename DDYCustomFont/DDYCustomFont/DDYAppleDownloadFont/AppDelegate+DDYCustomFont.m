@@ -1,5 +1,6 @@
 #import "AppDelegate+DDYCustomFont.h"
 #import <objc/runtime.h>
+#import "ViewController.h"
 
 
 @implementation AppDelegate (DDYCustomFont)
@@ -24,10 +25,17 @@
 
 #pragma mark 在程序启动后注册3DTouch
 - (BOOL)ddy_FontApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    __weak __typeof (self)weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [AppDelegate ddy_MatchAndDownload:[[NSUserDefaults standardUserDefaults] objectForKey:@"DDYDownloadFontName"] complete:nil];
+        [AppDelegate ddy_MatchAndDownload:[[NSUserDefaults standardUserDefaults] objectForKey:@"DDYDownloadFontName"] complete:^(CTFontDescriptorMatchingState state, CGFloat progress) {
+            __strong __typeof (weakSelf)strongSelf = weakSelf;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // 实际可能不这么硬写，可以根据需求，这只是demo
+                strongSelf.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:[ViewController new]];
+            });
+        }];
     });
-    [self ddy_FontApplication:application didFinishLaunchingWithOptions:launchOptions];
+//    [self ddy_FontApplication:application didFinishLaunchingWithOptions:launchOptions];
     return YES;
 }
 

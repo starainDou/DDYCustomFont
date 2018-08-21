@@ -99,6 +99,7 @@
                 strongSelf.tipLabel.text = [NSString stringWithFormat:@"a完成:%@ 进度:%.0f%%", sender.titleLabel.text, 100.];
                 [strongSelf buttonUserInteractionEnabled:YES];
                 strongSelf.tipLabel.font = [UIFont fontWithName:sender.titleLabel.text size:20];
+                // 可以用钥匙串，不怕删除app
                 [[NSUserDefaults standardUserDefaults] setValue:sender.titleLabel.text forKey:@"DDYDownloadFontName"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }

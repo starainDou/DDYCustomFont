@@ -20,6 +20,8 @@
 
 @property (nonatomic, strong) UIButton *button2;
 
+@property (nonatomic, strong) UIButton *button3;
+
 @end
 
 @implementation ViewController
@@ -38,10 +40,22 @@
     return _button2;
 }
 
+- (UIButton *)button3 {
+    if (!_button3) {
+        _button3 = [self btnY:150 tag:103 title:@"Test 测试"];
+        NSString *fontName = [[NSUserDefaults standardUserDefaults] objectForKey:@"DDYDownloadFontName"];
+        if (fontName) {
+            _button3.titleLabel.font = [UIFont fontWithName:fontName size:15];
+        }
+    }
+    return _button3;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.button1];
     [self.view addSubview:self.button2];
+    [self.view addSubview:self.button3];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
